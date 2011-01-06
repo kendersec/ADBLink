@@ -1,0 +1,17 @@
+Making all in src
+make[3]: Entering directory `/home/kender/Desktop/inotify-tools2/libinotifytools/src'
+/bin/bash ../../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../..    -std=c99 -g -O2 -MT inotifytools.lo -MD -MP -MF .deps/inotifytools.Tpo -c -o inotifytools.lo inotifytools.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../.. -std=c99 -g -O2 -MT inotifytools.lo -MD -MP -MF .deps/inotifytools.Tpo -c inotifytools.c  -fPIC -DPIC -o .libs/inotifytools.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../.. -std=c99 -g -O2 -MT inotifytools.lo -MD -MP -MF .deps/inotifytools.Tpo -c inotifytools.c -o inotifytools.o >/dev/null 2>&1
+mv -f .deps/inotifytools.Tpo .deps/inotifytools.Plo
+/bin/bash ../../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../..    -std=c99 -g -O2 -MT redblack.lo -MD -MP -MF .deps/redblack.Tpo -c -o redblack.lo redblack.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../.. -std=c99 -g -O2 -MT redblack.lo -MD -MP -MF .deps/redblack.Tpo -c redblack.c  -fPIC -DPIC -o .libs/redblack.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../.. -std=c99 -g -O2 -MT redblack.lo -MD -MP -MF .deps/redblack.Tpo -c redblack.c -o redblack.o >/dev/null 2>&1
+mv -f .deps/redblack.Tpo .deps/redblack.Plo
+/bin/bash ../../libtool --tag=CC   --mode=link gcc -std=c99 -g -O2 -version-info 4:1:4  -o libinotifytools.la -rpath /usr/local/lib inotifytools.lo redblack.lo  
+libtool: link: gcc -shared  .libs/inotifytools.o .libs/redblack.o      -Wl,-soname -Wl,libinotifytools.so.0 -o .libs/libinotifytools.so.0.4.1
+libtool: link: (cd ".libs" && rm -f "libinotifytools.so.0" && ln -s "libinotifytools.so.0.4.1" "libinotifytools.so.0")
+libtool: link: (cd ".libs" && rm -f "libinotifytools.so" && ln -s "libinotifytools.so.0.4.1" "libinotifytools.so")
+libtool: link: ar cru .libs/libinotifytools.a  inotifytools.o redblack.o
+libtool: link: ranlib .libs/libinotifytools.a
+libtool: link: ( cd ".libs" && rm -f "libinotifytools.la" && ln -s "../libinotifytools.la" "libinotifytools.la" )
