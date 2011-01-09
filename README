@@ -1,0 +1,44 @@
+The program is a modification of the original tool adb (Android Developers Bridge) developed by the Android team and made open source with the rest of the Android system.
+
+------- From the Android website ----------------------------------------------
+
+Android Debug Bridge (adb) is a versatile tool lets you manage the state of an emulator instance or Android-powered device. It is a client-server program that includes three components:
+
+A client, which runs on your development machine. You can invoke a client from a shell by issuing an adb command. Other Android tools such as the ADT plugin and DDMS also create adb clients.
+
+A server, which runs as a background process on your development machine. The server manages communication between the client and the adb daemon running on an emulator or device.
+
+A daemon, which runs as a background process on each emulator or device instance.
+
+When you start an adb client, the client first checks whether there is an adb server process already running. If there isn't, it starts the server process. When the server starts, it binds to local TCP port 5037 and listens for commands sent from adb clients—all adb clients use port 5037 to communicate with the adb server.
+
+The server then sets up connections to all running emulator/device instances. It locates emulator/device instances by scanning odd-numbered ports in the range 5555 to 5585, the range used by emulators/devices. Where the server finds an adb daemon, it sets up a connection to that port. Note that each emulator/device instance acquires a pair of sequential ports — an even-numbered port for console connections and an odd-numbered port for adb connections. For example:
+
+Emulator 1, console: 5554
+Emulator 1, adb: 5555
+Emulator 2, console: 5556
+Emulator 2, adb: 5557 ...
+
+As shown, the emulator instance connected to adb on port 5555 is the same as the instance whose console listens on port 5554.
+
+Once the server has set up connections to all emulator instances, you can use adb commands to control and access those instances. Because the server manages connections to emulator/device instances and handles commands from multiple adb clients, you can control any emulator/device instance from any client (or from a script).
+
+-------------------------------------------------------------------------------
+
+I modified the source code of adb so that there is a daemon that monitors a specified folder and synchronises it with a given folder in the mobile phone (this will normally be in the SD card). The synchronisation will happen when the phone gets plugged in, then the user modifies the folder that is being monitored. (/mnt/sdcard/Sync is the folder on the phone, hardcoded but could be changed).
+
+./adb link ~/Desktop/Android
+
+To do the monitoring of the local folder I have used the library libinotifytools that I adapted to compile with the Android build system.
+
+*********************************************************************************
+
+Files I have modified/created:
+
+commandline.c -> add “link” option to the command line (this calls do_link and creates the thread of the watcher)
+
+file_sync_client.c -> add “do_link” function (also in file_sync_service.h) it does the initial synchronisation
+
+watcher.c -> Using libinotifytools library it manages the synchronisation of the folder with the phone after the initial sync
+
+sysdeps.h -> Defines the PATH of the folder to synchronise on the phone
